@@ -47,6 +47,39 @@ describe("createFormData", () => {
     const formData = createFormData({ date: new Date(date) }, false);
     expect(formData.get("date")).toEqual(date);
   });
+
+  describe("should handle undefined", () => {
+    it("with stringify all", () => {
+      const data = {
+        undefined: undefined,
+      };
+      const formData = createFormData(data, true);
+      expect(formData.get("undefined")).toEqual("undefined");
+    });
+    it("without stringify all", () => {
+      const data = {
+        undefined: undefined,
+      };
+      const formData = createFormData(data, false);
+      expect(formData.get("undefined")).toEqual(undefined);
+    });
+  });
+  describe("should handle null", () => {
+    it("with stringify all", () => {
+      const data = {
+        null: null,
+      };
+      const formData = createFormData(data, true);
+      expect(formData.get("null")).toEqual("null");
+    });
+    it("without stringify all", () => {
+      const data = {
+        null: null,
+      };
+      const formData = createFormData(data, false);
+      expect(formData.get("null")).toEqual(null);
+    });
+  });
 });
 
 describe("parseFormData", () => {
